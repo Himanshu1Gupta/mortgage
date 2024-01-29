@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.proptiger.mortgage</groupId>
+    <artifactId>mortgage</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <name>mortgage</name>
+    <description>mortgage service</description>
+    <modules>
+        <module>web</module>
+        <module>dao</module>
+        <module>model</module>
+        <module>core</module>
+        <module>util</module>
+    </modules>
+    <properties>
+        <java.version>17</java.version>
+        <revision>0.0.1-SNAPSHOT</revision>
+<!--        <flyway.maven.plugin.version>1.0.0</flyway.maven.plugin.version>-->
+        <pyro.version>8.3.7</pyro.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <flyway.version>5.2.4</flyway.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.proptiger</groupId>
+            <artifactId>pyro</artifactId>
+            <version>${pyro.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.springfox</groupId>
+                    <artifactId>springfox-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-core</artifactId>-->
+<!--            <version>${flyway.version}</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+            <scope>runtime</scope>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.netty</groupId>-->
+<!--            <artifactId>netty-resolver-dns-native-macos</artifactId>-->
+<!--            <classifier>osx-aarch_64</classifier>-->
+<!--        </dependency>-->
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>mysql</artifactId>
+                <version>1.16.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.flywaydb</groupId>-->
+<!--                <artifactId>flyway-maven-plugin</artifactId>-->
+<!--                <version>${flyway.version}</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; Database configurations &ndash;&gt;-->
+<!--                    <url>jdbc:mysql://localhost:3308/mario</url>-->
+<!--                    <user>app</user>-->
+<!--                    <password>AeNgleC9m</password>-->
+
+<!--                    &lt;!&ndash; Other Flyway configurations, if needed &ndash;&gt;-->
+<!--                </configuration>-->
+<!--                <dependencies>-->
+<!--                    &lt;!&ndash; Database driver dependency &ndash;&gt;-->
+<!--                    <dependency>-->
+<!--                        <groupId>mysql</groupId>-->
+<!--                        <artifactId>mysql-connector-java</artifactId>-->
+<!--                        <version>8.0.23</version> &lt;!&ndash; Adjust the version based on your MySQL version &ndash;&gt;-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--            </plugin>-->
+        </plugins>
+    </build>
+
+</project>
