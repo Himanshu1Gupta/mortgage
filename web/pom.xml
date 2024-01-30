@@ -30,7 +30,77 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+<!--            <plugin>-->
+<!--                <groupId>io.fabric8</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                <version>0.34.1</version> &lt;!&ndash; Adjust the version based on your requirements &ndash;&gt;-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>default</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>push-image</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>push</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; Docker image configuration &ndash;&gt;-->
+<!--                    <images>-->
+<!--                        <image>-->
+<!--                            <name>${docker.image.prefix}/mortgage.web</name>-->
+<!--                            <build>-->
+<!--                                &lt;!&ndash; Dockerfile location &ndash;&gt;-->
+<!--                                <dockerFileDir>${project.basedir}/web</dockerFileDir>-->
+<!--                                &lt;!&ndash; Additional build arguments if needed &ndash;&gt;-->
+<!--&lt;!&ndash;                                <buildArgs>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <JAR_FILE>target/web*.jar</JAR_FILE>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </buildArgs>&ndash;&gt;-->
+<!--                            </build>-->
+<!--                        </image>-->
+<!--                    </images>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>com.spotify</groupId>-->
+<!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
+<!--                <version>1.4.3</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>default</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>push-image</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>push</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <repository>${docker.image.prefix}/mortgage.web</repository>-->
+<!--                    <tag>${activatedProperties}-${revision}</tag>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+            <!--       This Plugin Needs Main File to be there in Module-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

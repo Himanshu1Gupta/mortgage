@@ -23,13 +23,50 @@
         <module>util</module>
     </modules>
     <properties>
+        <docker.image.prefix>${docker.repository.url}</docker.image.prefix>
+        <docker.image.tag>latest</docker.image.tag>
         <java.version>17</java.version>
         <revision>0.0.1-SNAPSHOT</revision>
-<!--        <flyway.maven.plugin.version>1.0.0</flyway.maven.plugin.version>-->
         <pyro.version>8.3.7</pyro.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <flyway.version>5.2.4</flyway.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+                <docker.repository.url>localhost:5000</docker.repository.url>
+<!--                <spring.cloud.config.uri>http://localhost:8080/cube</spring.cloud.config.uri>-->
+<!--                <spring.cloud.config.fail-fast>false</spring.cloud.config.fail-fast>-->
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>beta</id>
+            <properties>
+                <activatedProperties>beta</activatedProperties>
+                <docker.repository.url>530913736905.dkr.ecr.ap-southeast-1.amazonaws.com</docker.repository.url>
+                <spring.cloud.config.uri>http://beta-cube.api-ws.com/cube</spring.cloud.config.uri>
+                <spring.cloud.config.fail-fast>true</spring.cloud.config.fail-fast>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+                <docker.repository.url>530913736905.dkr.ecr.ap-southeast-1.amazonaws.com</docker.repository.url>
+                <spring.cloud.config.uri>http://cube.api.com/cube</spring.cloud.config.uri>
+                <spring.cloud.config.fail-fast>true</spring.cloud.config.fail-fast>
+            </properties>
+        </profile>
+    </profiles>
+
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -63,11 +100,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--            <version>${flyway.version}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -99,15 +131,17 @@
         </dependencies>
     </dependencyManagement>
 
+
     <build>
         <plugins>
+<!--       To run mvn flyway:migrate on local uncomment this Plugin -->
 <!--            <plugin>-->
 <!--                <groupId>org.flywaydb</groupId>-->
 <!--                <artifactId>flyway-maven-plugin</artifactId>-->
 <!--                <version>${flyway.version}</version>-->
 <!--                <configuration>-->
 <!--                    &lt;!&ndash; Database configurations &ndash;&gt;-->
-<!--                    <url>jdbc:mysql://localhost:3308/mario</url>-->
+<!--                    <url>jdbc:mysql://localhost:3308/mortgage</url>-->
 <!--                    <user>app</user>-->
 <!--                    <password>AeNgleC9m</password>-->
 
