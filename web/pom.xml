@@ -37,10 +37,11 @@
             </resource>
         </resources>
         <plugins>
+<!--       This Plugin is the alternative for dockerfile-maven-plugin on mac m1 chip-->
 <!--            <plugin>-->
 <!--                <groupId>io.fabric8</groupId>-->
 <!--                <artifactId>docker-maven-plugin</artifactId>-->
-<!--                <version>0.34.1</version> &lt;!&ndash; Adjust the version based on your requirements &ndash;&gt;-->
+<!--                <version>0.43.4</version> &lt;!&ndash; Adjust the version based on your requirements &ndash;&gt;-->
 <!--                <executions>-->
 <!--                    <execution>-->
 <!--                        <id>default</id>-->
@@ -64,7 +65,7 @@
 <!--                            <name>${docker.image.prefix}/mortgage.web</name>-->
 <!--                            <build>-->
 <!--                                &lt;!&ndash; Dockerfile location &ndash;&gt;-->
-<!--                                <dockerFileDir>${project.basedir}/web</dockerFileDir>-->
+<!--                                <dockerFileDir>${project.basedir}</dockerFileDir>-->
 <!--                                &lt;!&ndash; Additional build arguments if needed &ndash;&gt;-->
 <!--&lt;!&ndash;                                <buildArgs>&ndash;&gt;-->
 <!--&lt;!&ndash;                                    <JAR_FILE>target/web*.jar</JAR_FILE>&ndash;&gt;-->
@@ -74,31 +75,31 @@
 <!--                    </images>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>com.spotify</groupId>-->
-<!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
-<!--                <version>1.4.3</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>default</id>-->
-<!--                        <phase>install</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>build</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                    <execution>-->
-<!--                        <id>push-image</id>-->
-<!--                        <phase>install</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>push</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--                <configuration>-->
-<!--                    <repository>${docker.image.prefix}/mortgage.web</repository>-->
-<!--                    <tag>${activatedProperties}-${revision}</tag>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.3</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>push-image</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${docker.image.prefix}/mortgage.web</repository>
+                    <tag>${revision}</tag>
+                </configuration>
+            </plugin>
 
             <!--       This Plugin Needs Main File to be there in Module-->
             <plugin>

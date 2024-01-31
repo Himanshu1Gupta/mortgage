@@ -37,9 +37,9 @@
             <id>dev</id>
             <properties>
                 <activatedProperties>dev</activatedProperties>
-                <docker.repository.url>localhost:5000</docker.repository.url>
-<!--                <spring.cloud.config.uri>http://localhost:8080/cube</spring.cloud.config.uri>-->
-<!--                <spring.cloud.config.fail-fast>false</spring.cloud.config.fail-fast>-->
+                <docker.repository.url>localhost:5001</docker.repository.url>
+                <spring.cloud.config.uri>http://localhost:8080/cube</spring.cloud.config.uri>
+                <spring.cloud.config.fail-fast>false</spring.cloud.config.fail-fast>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
