@@ -27,7 +27,7 @@
         <docker.image.tag>latest</docker.image.tag>
         <java.version>17</java.version>
         <revision>0.0.1-SNAPSHOT</revision>
-        <pyro.version>8.3.7</pyro.version>
+        <pyro.version>8.4.4</pyro.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <flyway.version>5.2.4</flyway.version>
     </properties>
