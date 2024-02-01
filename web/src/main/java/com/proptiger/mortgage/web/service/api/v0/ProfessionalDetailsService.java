@@ -1,27 +1,70 @@
 package com.proptiger.mortgage.web.service.api.v0;
 
+import com.proptiger.mortgage.dao.ProfessionalDetailsDao;
+import com.proptiger.mortgage.model.ProfessionalDetails;
+import com.proptiger.mortgage.util.helpers.api.v0.ProfessionalDetailsServiceHelper;
+import com.proptiger.pyro.core.constants.ResponseCodes;
+import com.proptiger.pyro.core.exception.BadRequestException;
 import com.proptiger.pyro.mortgage.request.api.v0.professionalDetails.CreateProfessionalDetailsRequestDTO;
 import com.proptiger.pyro.mortgage.request.api.v0.professionalDetails.GetProfessionalDetailsRequestDTO;
 import com.proptiger.pyro.mortgage.request.api.v0.professionalDetails.UpdateProfessionalDetailsRequestDTO;
 import com.proptiger.pyro.mortgage.response.api.v0.professionalDetails.ProfessionalDetailsResponseDTO;
+import java.util.Optional;
+import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProfessionalDetailsService {
 
+
+    @Autowired
+    private ProfessionalDetailsDao professionalDetailsDao;
+
+    @Autowired
+    private ProfessionalDetailsServiceHelper professionalDetailsServiceHelper;
+
+    @Transactional
     public ProfessionalDetailsResponseDTO create(CreateProfessionalDetailsRequestDTO requestDTO) {
-        //todo:implement this
-        return null;
+
+        ProfessionalDetails professionalDetails = ProfessionalDetails.builder().build();
+
+        professionalDetailsDao.save(professionalDetails);
+        //after this, professionalDetails will have an id, which needs to be stored in mortgage_partner table
+
+        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(professionalDetails, requestDTO.getMortgagePartnerId());
     }
 
     public ProfessionalDetailsResponseDTO update(Integer id, UpdateProfessionalDetailsRequestDTO requestDTO) {
         //todo:implement this
-        return null;
+        Optional<ProfessionalDetails> professionalDetailsOpt = professionalDetailsDao.findById(id);
+        if(professionalDetailsOpt.isEmpty()){
+            throw new BadRequestException(ResponseCodes.BAD_REQUEST, "Invalid id provided");
+        }
+
+        ProfessionalDetails professionalDetails = professionalDetailsOpt.get();
+
+        professionalDetails.setEmailAddress(requestDTO.getEmailAddress());
+        //todo: add more fields
+
+        professionalDetailsDao.save(professionalDetails);
+
+        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(professionalDetails, requestDTO.getMortgagePartnerId());
     }
 
     public ProfessionalDetailsResponseDTO get(GetProfessionalDetailsRequestDTO getProfessionalDetailsRequestDTO) {
+        Optional<ProfessionalDetails> professionalDetailsOpt = professionalDetailsDao.findById(
+            getProfessionalDetailsRequestDTO.getId());
+        if(professionalDetailsOpt.isEmpty()){
+            throw new BadRequestException(ResponseCodes.BAD_REQUEST, "Invalid id provided");
+        }
+
+        ProfessionalDetails professionalDetails = professionalDetailsOpt.get();
+
+        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(professionalDetails, getProfessionalDetailsRequestDTO.getMortgagePartnerId());
+
         //todo:implement this
-        return null;
     }
+
 
 }
