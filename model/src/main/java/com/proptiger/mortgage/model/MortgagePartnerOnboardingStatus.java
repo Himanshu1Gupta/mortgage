@@ -23,7 +23,7 @@ public class MortgagePartnerOnboardingStatus implements Serializable {
     private Integer id;
 
     @Column(nullable = false)
-    private String name;
+    private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false)
