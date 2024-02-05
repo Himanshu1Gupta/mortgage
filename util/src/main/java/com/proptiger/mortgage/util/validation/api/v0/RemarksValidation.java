@@ -29,8 +29,6 @@ public class RemarksValidation {
         if(!errors.isEmpty()){
             throw new BadRequestException(ResponseCodes.BAD_REQUEST, String.join(", ", errors));
         }
-
-        //todo:implement this method, add more validations
     }
 
     public static void validateGetRemarksRequest(GetRemarksRequestDTO requestDTO) {
@@ -41,7 +39,6 @@ public class RemarksValidation {
         if (requestDTO.getRemarkTypeId() == null) {
             throw new BadRequestException(ResponseCodes.BAD_REQUEST, "RemarkTypeId is mandatory");
         }
-        //todo:implement this method, add more validations
     }
 
     public static void validateGetPossibleRemarksRequest(GetPossibleRemarksRequestDTO requestDTO) {
