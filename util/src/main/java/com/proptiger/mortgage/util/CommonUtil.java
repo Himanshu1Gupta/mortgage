@@ -20,4 +20,8 @@ public class CommonUtil {
             return defaultValue;
         }
     }
+
+    public static Boolean getValueFromBoolean(Boolean val) {
+        return val == null ? false : val;
+    }
 }

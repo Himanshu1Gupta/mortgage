@@ -3,8 +3,8 @@ package com.proptiger.mortgage.util.validation.api.v0;
 import com.proptiger.pyro.core.constants.ResponseCodes;
 import com.proptiger.pyro.core.exception.BadRequestException;
 import com.proptiger.pyro.mortgage.request.api.v0.remarks.CreateRemarkRequestDTO;
-import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetLatestRemarkRequestDTO;
 import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetPossibleRemarksRequestDTO;
+import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetRemarksRequestDTO;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class RemarksValidation {
         //todo:implement this method, add more validations
     }
 
-    public static void validateGetLatestRemarkRequest(GetLatestRemarkRequestDTO requestDTO) {
+    public static void validateGetRemarksRequest(GetRemarksRequestDTO requestDTO) {
         if (requestDTO == null || requestDTO.getMortgagePartnerId() == null) {
             throw new BadRequestException(ResponseCodes.BAD_REQUEST,
                 "mortgagePartnerId is mandatory");

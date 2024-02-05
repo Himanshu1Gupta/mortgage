@@ -24,7 +24,6 @@ public class RemarksServiceHelper {
     }
 
     public RemarkResponseDTO toRemarkResponseDTO(Remarks remarks) {
-        //TODO: implement this
         return RemarkResponseDTO
             .builder()
             .Id(remarks.getId())
@@ -33,6 +32,8 @@ public class RemarksServiceHelper {
             .remarkTypeId(remarks.getRemarkTypeId())
             .remarkType(CommonUtil.getValue(() -> remarks.getRemarkTypes().getRemarkType(),
                 Keys.EMPTY_STRING))
+            .createdAt(remarks.getCreatedAt())
+            .updatedAt(remarks.getUpdatedAt())
             .build();
     }
 }

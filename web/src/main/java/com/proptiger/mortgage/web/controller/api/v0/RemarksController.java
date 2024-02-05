@@ -5,8 +5,8 @@ import com.proptiger.mortgage.util.validation.api.v0.RemarksValidation;
 import com.proptiger.mortgage.web.service.api.v0.RemarksService;
 import com.proptiger.pyro.common.pojo.response.APIResponse;
 import com.proptiger.pyro.mortgage.request.api.v0.remarks.CreateRemarkRequestDTO;
-import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetLatestRemarkRequestDTO;
 import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetPossibleRemarksRequestDTO;
+import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetRemarksRequestDTO;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,14 +33,15 @@ public class RemarksController {
     }
 
 
-    @GetMapping("/latest-remarks")
-    public APIResponse getLatestRemarks(
+    @GetMapping("/remarks")
+    public APIResponse getRemarks(
         @RequestParam Map<String, String> params) {
-        GetLatestRemarkRequestDTO getLatestRemarkRequestDTO =
-            objectMapper.convertValue(params, GetLatestRemarkRequestDTO.class);
-        RemarksValidation.validateGetLatestRemarkRequest(getLatestRemarkRequestDTO);
-        return new APIResponse(remarksService.getLatestRemarks(getLatestRemarkRequestDTO));
+        GetRemarksRequestDTO getRemarksRequestDTO =
+            objectMapper.convertValue(params, GetRemarksRequestDTO.class);
+        RemarksValidation.validateGetRemarksRequest(getRemarksRequestDTO);
+        return new APIResponse(remarksService.getRemarks(getRemarksRequestDTO));
     }
+
 
     @GetMapping("/possible-remarks")
     public APIResponse getPossibleRemarks(
