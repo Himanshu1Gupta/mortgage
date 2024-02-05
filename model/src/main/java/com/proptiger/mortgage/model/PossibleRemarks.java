@@ -1,18 +1,12 @@
 package com.proptiger.mortgage.model;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-import com.vladmihalcea.hibernate.type.json.JsonType;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -22,43 +16,25 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="remarks")
-@Builder
-@TypeDef(name = "json", typeClass = JsonType.class)
-public class Remarks implements Serializable {
-    private static final long serialVersionUID = 7700148590085921283L;
+@Table(name = "possible_remarks")
+public class PossibleRemarks implements Serializable {
+    private static final long serialVersionUID = 1630969673260968365L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Type(type = "json")
-    @Column(name = "remark", columnDefinition = "json")
-    private Map<String, Object> remark;
-
     @Column(name = "remark_type_id",nullable = false)
     private Integer remarkTypeId;
 
-    @Column(name = "mortgage_partner_id",nullable = false)
-    private Integer mortgagePartnerId;
-
-    @ManyToOne
-    @JoinColumn(name = "remark_type_id", insertable = false, updatable = false)
-    private RemarkTypes remarkTypes;
-
-    //todo: uncomment this, once mortgage_partner table is created
-//    @ManyToOne
-//    @JoinColumn(name = "mortgage_partner_id", insertable = false, updatable = false)
-//    private MortgagePartner mortgagePartner;
-
+    @Column(name = "text",nullable = false, unique=true)
+    private String text;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false)

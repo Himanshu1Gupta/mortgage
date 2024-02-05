@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -58,6 +60,12 @@ public class ProfessionalDetails implements Serializable {
     @Column(name = "pin_code_of_the_organization")
     private String pinCodeOfTheOrganization;
 
+    @Column(name = "aadhar_card_url")
+    private String aadharCardUrl;
+
+    @Column(name = "gst_certificate_url")
+    private String gstCertificateUrl;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
@@ -65,4 +73,15 @@ public class ProfessionalDetails implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
+
+    @PrePersist
+    private void prePersist() {
+        createdAt = new Date();
+        updatedAt = createdAt;
+    }
+
+    @PreUpdate
+    private void preUpdate() {
+        updatedAt = new Date();
+    }
 }

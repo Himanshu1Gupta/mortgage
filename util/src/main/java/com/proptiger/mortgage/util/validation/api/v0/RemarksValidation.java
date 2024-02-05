@@ -1,20 +1,16 @@
 package com.proptiger.mortgage.util.validation.api.v0;
 
-import com.proptiger.mortgage.util.constants.Keys;
 import com.proptiger.pyro.core.constants.ResponseCodes;
 import com.proptiger.pyro.core.exception.BadRequestException;
-import com.proptiger.pyro.mortgage.request.api.v0.professionalDetails.CreateProfessionalDetailsRequestDTO;
-import com.proptiger.pyro.mortgage.request.api.v0.professionalDetails.GetProfessionalDetailsRequestDTO;
-import com.proptiger.pyro.mortgage.request.api.v0.professionalDetails.UpdateProfessionalDetailsRequestDTO;
 import com.proptiger.pyro.mortgage.request.api.v0.remarks.CreateRemarkRequestDTO;
-import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetRemarkRequestDTO;
+import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetLatestRemarkRequestDTO;
+import com.proptiger.pyro.mortgage.request.api.v0.remarks.GetPossibleRemarksRequestDTO;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class RemarksValidation {
 
-    public static void validateCreateRequest(CreateRemarkRequestDTO requestDTO) {
+    public static void validateCreateRemarksRequest(CreateRemarkRequestDTO requestDTO) {
         if(requestDTO == null){
             throw new BadRequestException(ResponseCodes.BAD_REQUEST, "Request body is empty");
         }
@@ -37,7 +33,7 @@ public class RemarksValidation {
         //todo:implement this method, add more validations
     }
 
-    public static void validateGetRequest(GetRemarkRequestDTO requestDTO) {
+    public static void validateGetLatestRemarkRequest(GetLatestRemarkRequestDTO requestDTO) {
         if (requestDTO == null || requestDTO.getMortgagePartnerId() == null) {
             throw new BadRequestException(ResponseCodes.BAD_REQUEST,
                 "mortgagePartnerId is mandatory");
@@ -46,5 +42,12 @@ public class RemarksValidation {
             throw new BadRequestException(ResponseCodes.BAD_REQUEST, "RemarkTypeId is mandatory");
         }
         //todo:implement this method, add more validations
+    }
+
+    public static void validateGetPossibleRemarksRequest(GetPossibleRemarksRequestDTO requestDTO) {
+        if (requestDTO == null || requestDTO.getRemarkTypeId() == null) {
+            throw new BadRequestException(ResponseCodes.BAD_REQUEST,
+                "RemarkTypeId is mandatory");
+        }
     }
 }

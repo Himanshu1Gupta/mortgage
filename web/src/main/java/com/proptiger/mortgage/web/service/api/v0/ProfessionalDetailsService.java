@@ -27,7 +27,7 @@ public class ProfessionalDetailsService {
     @Transactional
     public ProfessionalDetailsResponseDTO create(CreateProfessionalDetailsRequestDTO requestDTO) {
 
-        ProfessionalDetails professionalDetails = ProfessionalDetails.builder().build();
+        ProfessionalDetails professionalDetails = professionalDetailsServiceHelper.toProfessionalDetail(requestDTO);
 
         professionalDetailsDao.save(professionalDetails);
         //after this, professionalDetails will have an id, which needs to be stored in mortgage_partner table
@@ -44,8 +44,7 @@ public class ProfessionalDetailsService {
 
         ProfessionalDetails professionalDetails = professionalDetailsOpt.get();
 
-        professionalDetails.setEmailAddress(requestDTO.getEmailAddress());
-        //todo: add more fields
+        professionalDetailsServiceHelper.updateProfessionalDetails(professionalDetails, requestDTO);
 
         professionalDetailsDao.save(professionalDetails);
 

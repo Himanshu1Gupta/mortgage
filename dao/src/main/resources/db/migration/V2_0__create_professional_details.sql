@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS professional_details (
     address_of_the_organization VARCHAR(255),
     state_of_the_organization VARCHAR(255),
     pin_code_of_the_organization VARCHAR(255),
+    aadhar_card_url VARCHAR(255),
+    gst_certificate_url VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
