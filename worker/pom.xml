@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.proptiger.mortgage</groupId>
+        <artifactId>mortgage</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>worker</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.proptiger.mortgage</groupId>
+            <artifactId>core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <!--       This Plugin is the alternative for dockerfile-maven-plugin on mac m1 chip-->
+            <!--            <plugin>-->
+            <!--                <groupId>io.fabric8</groupId>-->
+            <!--                <artifactId>docker-maven-plugin</artifactId>-->
+            <!--                <version>0.43.4</version> &lt;!&ndash; Adjust the version based on your requirements &ndash;&gt;-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>default</id>-->
+            <!--                        <phase>install</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>build</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>push-image</id>-->
+            <!--                        <phase>install</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>push</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <configuration>-->
+            <!--                    &lt;!&ndash; Docker image configuration &ndash;&gt;-->
+            <!--                    <images>-->
+            <!--                        <image>-->
+            <!--                            <name>${docker.image.prefix}/mortgage.web</name>-->
+            <!--                            <build>-->
+            <!--                                &lt;!&ndash; Dockerfile location &ndash;&gt;-->
+            <!--                                <dockerFileDir>${project.basedir}</dockerFileDir>-->
+            <!--                                &lt;!&ndash; Additional build arguments if needed &ndash;&gt;-->
+            <!--&lt;!&ndash;                                <buildArgs>&ndash;&gt;-->
+            <!--&lt;!&ndash;                                    <JAR_FILE>target/web*.jar</JAR_FILE>&ndash;&gt;-->
+            <!--&lt;!&ndash;                                </buildArgs>&ndash;&gt;-->
+            <!--                            </build>-->
+            <!--                        </image>-->
+            <!--                    </images>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.3</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>push-image</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${docker.image.prefix}/mortgage.worker</repository>
+                    <tag>{activatedProperties}-${revision}</tag>
+                </configuration>
+            </plugin>
+
+            <!--       This Plugin Needs Main File to be there in Module-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

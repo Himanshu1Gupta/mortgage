@@ -97,7 +97,7 @@
                 </executions>
                 <configuration>
                     <repository>${docker.image.prefix}/mortgage.web</repository>
-                    <tag>${revision}</tag>
+                    <tag>{activatedProperties}-${revision}</tag>
                 </configuration>
             </plugin>
 
