@@ -7,4 +7,5 @@ CREATE TABLE IF NOT EXISTS remarks (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     CONSTRAINT fk_remark_type_id FOREIGN KEY (remark_type_id) REFERENCES remark_types(id)
+--    CONSTRAINT fk_mortgage_partner_id FOREIGN KEY (mortgage_partner_id) REFERENCES mortgage_partners(id)
 );

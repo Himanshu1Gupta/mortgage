@@ -36,9 +36,7 @@ public class ProfessionalDetailsController {
     }
 
     @PutMapping(value = "/professional-details/{id}")
-    public APIResponse update(
-        @PathVariable Integer id,
-        @RequestParam(required = false)
+    public APIResponse update(@PathVariable Integer id,
         @RequestBody UpdateProfessionalDetailsRequestDTO requestDTO) {
         ProfessionalDetailsValidation.validateUpdateRequest(requestDTO);
         return new APIResponse(professionalDetailsService.update(id, requestDTO));

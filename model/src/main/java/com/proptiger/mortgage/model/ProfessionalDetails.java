@@ -30,6 +30,9 @@ public class ProfessionalDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "mortgage_partner_id",nullable = false)
+    private Integer mortgagePartnerId;
+
     @Column(name = "pan_number",nullable = false)
     private String panNumber;
 
@@ -82,6 +85,7 @@ public class ProfessionalDetails implements Serializable {
 
     @PreUpdate
     private void preUpdate() {
+
         updatedAt = new Date();
     }
 }

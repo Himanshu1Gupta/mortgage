@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 public class ProfessionalDetailsServiceHelper {
 
     public ProfessionalDetailsResponseDTO toProfessionalDetailsResponseDTO(
-        ProfessionalDetails professionalDetails, Integer mortgagePartnerId) {
+        ProfessionalDetails professionalDetails) {
         return ProfessionalDetailsResponseDTO
             .builder()
             .Id(professionalDetails.getId())
-            .mortgagePartnerId(mortgagePartnerId)
+            .mortgagePartnerId(professionalDetails.getMortgagePartnerId())
             .panNumber(professionalDetails.getPanNumber())
             .name(professionalDetails.getName())
             .mobileNumber(professionalDetails.getMobileNumber())
@@ -28,6 +28,8 @@ public class ProfessionalDetailsServiceHelper {
             .pinCodeOfTheOrganization(professionalDetails.getPinCodeOfTheOrganization())
             .aadharCardUrl(professionalDetails.getAadharCardUrl())
             .gstCertificateUrl(professionalDetails.getGstCertificateUrl())
+            .createdAt(professionalDetails.getCreatedAt())
+            .updatedAt(professionalDetails.getUpdatedAt())
             .build();
     }
 
@@ -35,6 +37,7 @@ public class ProfessionalDetailsServiceHelper {
         CreateProfessionalDetailsRequestDTO requestDTO) {
         return ProfessionalDetails
             .builder()
+            .mortgagePartnerId(requestDTO.getMortgagePartnerId())
             .panNumber(requestDTO.getPanNumber())
             .name(requestDTO.getName())
             .mobileNumber(requestDTO.getMobileNumber())
@@ -52,7 +55,6 @@ public class ProfessionalDetailsServiceHelper {
 
     public void updateProfessionalDetails(ProfessionalDetails professionalDetails,
         UpdateProfessionalDetailsRequestDTO requestDTO) {
-
         if (!StringUtil.isNullOrEmpty(requestDTO.getPanNumber())) {
             professionalDetails.setPanNumber(requestDTO.getPanNumber());
         }

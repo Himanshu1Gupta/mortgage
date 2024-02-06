@@ -27,18 +27,21 @@ public class ProfessionalDetailsService {
     @Transactional
     public ProfessionalDetailsResponseDTO create(CreateProfessionalDetailsRequestDTO requestDTO) {
 
-        ProfessionalDetails professionalDetails = professionalDetailsServiceHelper.toProfessionalDetail(requestDTO);
+        ProfessionalDetails professionalDetails = professionalDetailsServiceHelper.toProfessionalDetail(
+            requestDTO);
 
         professionalDetailsDao.save(professionalDetails);
         //after this, professionalDetails will have an id, which needs to be stored in mortgage_partner table
 
-        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(professionalDetails, requestDTO.getMortgagePartnerId());
+        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(
+            professionalDetails);
     }
 
-    public ProfessionalDetailsResponseDTO update(Integer id, UpdateProfessionalDetailsRequestDTO requestDTO) {
+    public ProfessionalDetailsResponseDTO update(Integer id,
+        UpdateProfessionalDetailsRequestDTO requestDTO) {
         //todo:implement this
         Optional<ProfessionalDetails> professionalDetailsOpt = professionalDetailsDao.findById(id);
-        if(professionalDetailsOpt.isEmpty()){
+        if (professionalDetailsOpt.isEmpty()) {
             throw new BadRequestException(ResponseCodes.BAD_REQUEST, "Invalid id provided");
         }
 
@@ -48,22 +51,29 @@ public class ProfessionalDetailsService {
 
         professionalDetailsDao.save(professionalDetails);
 
-        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(professionalDetails, requestDTO.getMortgagePartnerId());
+        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(
+            professionalDetails);
     }
 
-    public ProfessionalDetailsResponseDTO get(GetProfessionalDetailsRequestDTO getProfessionalDetailsRequestDTO) {
-        Optional<ProfessionalDetails> professionalDetailsOpt = professionalDetailsDao.findById(
-            getProfessionalDetailsRequestDTO.getId());
-        if(professionalDetailsOpt.isEmpty()){
-            throw new BadRequestException(ResponseCodes.BAD_REQUEST, "Invalid id provided");
+    public ProfessionalDetailsResponseDTO get(
+        GetProfessionalDetailsRequestDTO getProfessionalDetailsRequestDTO) {
+        Optional<ProfessionalDetails> professionalDetailsOpt = Optional.empty();
+        if (getProfessionalDetailsRequestDTO.getId() != null) {
+            professionalDetailsOpt = professionalDetailsDao.findById(
+                getProfessionalDetailsRequestDTO.getId());
+
+        } else {
+            //todo: add query by joining with mortgage_partner table
+        }
+
+        if (professionalDetailsOpt.isEmpty()) {
+            throw new BadRequestException(ResponseCodes.BAD_REQUEST, "Invalid params provided");
         }
 
         ProfessionalDetails professionalDetails = professionalDetailsOpt.get();
 
-        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(professionalDetails, getProfessionalDetailsRequestDTO.getMortgagePartnerId());
-
-        //todo:implement this
+        return professionalDetailsServiceHelper.toProfessionalDetailsResponseDTO(
+            professionalDetails);
     }
-
 
 }
