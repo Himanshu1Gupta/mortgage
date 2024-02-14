@@ -14,8 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "mortgage_partner_onboarding_statuses")
-public class MortgagePartnerOnboardingStatus implements Serializable {
+@Table(name = "mortgage_partner_sub_statuses")
+public class MortgagePartnerSubStatus implements Serializable {
     private static final long serialVersionUID = 6201760278790884141L;
 
     @Id

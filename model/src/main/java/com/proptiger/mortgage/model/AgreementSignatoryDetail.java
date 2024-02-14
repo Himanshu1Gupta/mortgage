@@ -14,8 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "mortgage_partner_onboarding_statuses")
-public class MortgagePartnerOnboardingStatus implements Serializable {
+@Table(name = "agreement_signatory_details")
+public class AgreementSignatoryDetail implements Serializable {
     private static final long serialVersionUID = 6201760278790884141L;
 
     @Id
@@ -23,7 +23,12 @@ public class MortgagePartnerOnboardingStatus implements Serializable {
     private Integer id;
 
     @Column(nullable = false)
-    private String status;
+    private String name;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    private String proofUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false)
@@ -44,3 +49,4 @@ public class MortgagePartnerOnboardingStatus implements Serializable {
         updatedAt = new Date();
     }
 }
+
